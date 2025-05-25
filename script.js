@@ -55,9 +55,22 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-console.log(humanSelection);
-console.log(computerSelection);
-playRound(humanSelection, computerSelection);
+function playGame(){
+    
+    while(humanScore != 3 && computerScore != 3){
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+        console.log(`You:${humanScore} \nComputer:${computerScore}`);
+    }
+    if (humanScore == 3)[
+        console.log("YOU WON!! GOOD JOB :D")
+    ]
+    else{
+        console.log('You lost :(')
+    }
+
+}
+
+playGame();
