@@ -1,11 +1,12 @@
-console.log('hello there')
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice(){
-    let number = (Math.random()) * 100;
-    if (number < 34){
+    let number = Math.floor(Math.random() * 3)
+    if (number == 0){
         return 'rock';}
 
-    else if (number < 67){
+    else if (number == 1){
         return 'paper';
     }
     else {
@@ -18,4 +19,45 @@ function getHumanChoice(){
     return choice;
 }
 
-console.log(getHumanChoice())
+function playRound(humanChoice, computerChoice){
+    if (humanChoice == computerChoice){
+        console.log("it's a draw")
+    }
+    else if (computerChoice == 'rock'){
+        if(humanChoice == 'scissors'){
+            computerScore++;
+            console.log('You lost, rock beats scissors')
+        }
+        if(humanChoice == 'paper'){
+            humanScore++;
+            console.log('You won, paper beats rock')
+        }
+    } 
+    else if(computerChoice == 'paper'){
+        if(humanChoice == 'rock'){
+            computerScore ++;
+            console.log("You lost, paper beats rock")
+        }
+        else if(humanChoice == 'scissors'){ 
+            humanScore++;
+            console.log('You won, scissors beats paper')
+        }
+    }
+    else if (computerChoice == 'scissors'){
+        if (humanChoice == 'rock'){
+            humanScore++
+            console.log('You won, rock beats scissors')
+        }
+        else if (humanChoice == 'paper'){
+            computerScore++;
+            console.log('You lost, scissors beats paper');
+        }
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+console.log(humanSelection);
+console.log(computerSelection);
+playRound(humanSelection, computerSelection);
