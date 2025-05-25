@@ -1,5 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
+let playAgain = 'Y'
 
 function getComputerChoice(){
     let number = Math.floor(Math.random() * 3)
@@ -73,4 +74,9 @@ function playGame(){
 
 }
 
+while(playAgain == 'Y'){
 playGame();
+humanScore = 0;
+computerScore = 0;
+playAgain = (prompt('Play again? Y or N: ')).toUpperCase();
+}
