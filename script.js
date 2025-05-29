@@ -1,82 +1,68 @@
 let humanScore = 0;
 let computerScore = 0;
-let playAgain = 'Y'
+
+const buttons = document.querySelectorAll('.playerButtons button');
+const playerChoiceDisplay = document.querySelector('#player-choice');
+const computerChoiceDisplay = document.querySelector('.choices #computer-choice');
+const scoreDisplay = document.querySelectorAll('.score p');
+const winnerDisplay = document.querySelector('.winner h2');
+
 
 function getComputerChoice(){
-    let number = Math.floor(Math.random() * 3)
-    if (number == 0){
-        return 'rock';}
+    const choices = ['rock', 'paper', 'scissors'];
+    const number = Math.floor(Math.random() * 3);
+    return choices[number];}
 
-    else if (number == 1){
-        return 'paper';
-    }
-    else {
-        return 'scissors';
-    }
-}
-
-function getHumanChoice(){
-    let choice = (prompt("Choose rock, paper, or scissors")).toLowerCase();
-    return choice;
-}
 
 function playRound(humanChoice, computerChoice){
     if (humanChoice == computerChoice){
-        console.log("it's a draw")
+        return "It's a draw!"
     }
-    else if (computerChoice == 'rock'){
-        if(humanChoice == 'scissors'){
-            computerScore++;
-            console.log('You lost, rock beats scissors')
-        }
-        if(humanChoice == 'paper'){
-            humanScore++;
-            console.log('You won, paper beats rock')
-        }
-    } 
-    else if(computerChoice == 'paper'){
-        if(humanChoice == 'rock'){
-            computerScore ++;
-            console.log("You lost, paper beats rock")
-        }
-        else if(humanChoice == 'scissors'){ 
-            humanScore++;
-            console.log('You won, scissors beats paper')
-        }
+    if (
+        (humanChoice == 'rock' && computerChoice == 'scissors') ||
+        (humanChoice == 'paper' && computerChoice == 'rock') ||
+        (humanChoice == 'scissors' && computerChoice == 'paper')
+    ){
+        humanScore++;
+        return `You win, ${humanChoice} beats ${computerChoice}`
     }
-    else if (computerChoice == 'scissors'){
-        if (humanChoice == 'rock'){
-            humanScore++
-            console.log('You won, rock beats scissors')
-        }
-        else if (humanChoice == 'paper'){
-            computerScore++;
-            console.log('You lost, scissors beats paper');
-        }
-    }
-}
-
-
-function playGame(){
-    
-    while(humanScore != 3 && computerScore != 3){
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
-        console.log(`You:${humanScore} \nComputer:${computerScore}`);
-    }
-    if (humanScore == 3)[
-        console.log("YOU WON!! GOOD JOB :D")
-    ]
     else{
-        console.log('You lost :(')
+        computerScore++;
+        return `You lost, ${computerChoice} beats ${humanChoice}`
     }
-
 }
 
-while(playAgain == 'Y'){
-playGame();
-humanScore = 0;
-computerScore = 0;
-playAgain = (prompt('Play again? Y or N: ')).toUpperCase();
+function checkWinner(){
+    if (humanScore === 3){
+        winnerDisplay.textContent = 'YOU WON!! GOOD JOB :D';
+        disableButtons();
+    }
+    if (computerScore === 3){
+        winnerDisplay.textContent = 'You lost :(';
+        disableButtons();
+    }
 }
+
+function disableButtons(){
+    buttons.forEach(btn => btn.disabled = true);
+}
+
+function updateUI(humanChoice,computerChoice,result){
+    playerChoiceDisplay.textContent = `You chose: ${humanChoice}`;
+    computerChoiceDisplay.textContent = `Computer chose: ${computerChoice}`;
+    scoreDisplay[0].textContent = `player: ${humanScore}`;
+    scoreDisplay[1].textContent = `computer: ${computerScore}`;
+    winnerDisplay.textContent = `Result: ${result}`;
+}
+
+
+buttons.forEach(button => {
+    button.addEventListener('click',() => {
+        const humanChoice = button.textContent;
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice);
+        updateUI(humanChoice, computerChoice, result);
+        checkWinner();
+
+    });
+});
