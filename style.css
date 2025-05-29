@@ -1,0 +1,35 @@
+div {
+  border: 2px solid red;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  gap: 32px;
+}
+
+.gameplay {
+  display: flex;
+  height: 400px;
+}
+
+.playerButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  margin-left: 5px;
+}
+
+.choices {
+  width: 75vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 25px;
+}
