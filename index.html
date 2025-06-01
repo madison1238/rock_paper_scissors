@@ -5,27 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <script src="script.js" defer></script>
-    <h1>Rock Paper Scissors</h1>
+    <h1>ROCK PAPER SCISSORS</h1>
     <div class="score">
-      <p>player 0</p>
-      <p>computer 0</p>
+      <div class="score-box">
+        <p class="label">PLAYER</p>
+        <p class="value" id="player-score">0</p>
+      </div>
+      <div class="score-box">
+        <p class="label">COMPUTER</p>
+        <p class="value" id="computer-score">0</p>
+      </div>
     </div>
     <div class="gameplay">
       <div class="playerButtons">
-        <button>rock</button>
-        <button>paper</button>
-        <button>scissors</button>
+        <button data-choice="rock">🤜</button>
+        <button data-choice="paper">✋</button>
+        <button data-choice="scissors">✌️</button>
       </div>
       <div class="choices">
-        <p id="player-choice">You chose:</p>
-        <p id="computer-choice">Computer chose:</p>
+        <div class="choice-display">
+          <p class="subtitle">You chose:</p>
+          <p id="player" class="icon"></p>
+        </div>
+        <div class="choice-display">
+          <p class="subtitle">Computer chose:</p>
+          <p id="computer" class="icon"></p>
+        </div>
       </div>
     </div>
     <div class="winner">
-      <h2>Result:</h2>
+      <h2></h2>
     </div>
   </body>
 </html>

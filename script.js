@@ -2,8 +2,8 @@ let humanScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('.playerButtons button');
-const playerChoiceDisplay = document.querySelector('#player-choice');
-const computerChoiceDisplay = document.querySelector('.choices #computer-choice');
+const playerChoiceDisplay = document.querySelector('#player', '.icon');
+const computerChoiceDisplay = document.querySelector('#computer', '.icon');
 const scoreDisplay = document.querySelectorAll('.score p');
 const winnerDisplay = document.querySelector('.winner h2');
 
@@ -47,18 +47,24 @@ function disableButtons(){
     buttons.forEach(btn => btn.disabled = true);
 }
 
+function textToEmjoi(word){
+    if(word == 'rock') return '🤜';
+    if(word == 'paper') return '✋';
+    if (word == 'scissors') return '✌️';
+}
+
 function updateUI(humanChoice,computerChoice,result){
-    playerChoiceDisplay.textContent = `You chose: ${humanChoice}`;
-    computerChoiceDisplay.textContent = `Computer chose: ${computerChoice}`;
-    scoreDisplay[0].textContent = `player: ${humanScore}`;
-    scoreDisplay[1].textContent = `computer: ${computerScore}`;
-    winnerDisplay.textContent = `Result: ${result}`;
+    playerChoiceDisplay.textContent = textToEmjoi(humanChoice);
+    computerChoiceDisplay.textContent = textToEmjoi(computerChoice);
+    scoreDisplay[1].textContent = ` ${humanScore}`;
+    scoreDisplay[3].textContent = ` ${computerScore}`;
+    winnerDisplay.textContent = `${result}`;
 }
 
 
 buttons.forEach(button => {
     button.addEventListener('click',() => {
-        const humanChoice = button.textContent;
+        const humanChoice = button.dataset.choice;
         const computerChoice = getComputerChoice();
         const result = playRound(humanChoice, computerChoice);
         updateUI(humanChoice, computerChoice, result);
